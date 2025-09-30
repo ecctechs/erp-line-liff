@@ -5,7 +5,7 @@
       v-if="profile && profile.pictureUrl"
       :src="profile.pictureUrl"
       alt="Profile"
-      class="rounded-circle"
+      class="rounded-circle border border-2 border-success"
       width="40"
       height="40"
     />
