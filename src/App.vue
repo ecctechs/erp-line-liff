@@ -12,14 +12,14 @@ import LiffLogin from './components/LiffLogin.vue';
 </script>
 
 <style>
-html, body, #app, main {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* Style ทั่วไปสำหรับ App */
+#app {
+  text-align: center;
+  color: #2c3e50;
 }
-
-main {
-  display: flex;
-  flex-direction: column;
+header {
+  background-color: #00B900;
+  color: white;
+  padding: 10px;
 }
 </style>

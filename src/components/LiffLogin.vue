@@ -74,7 +74,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 80vh;
   text-align: center;
 }
 
