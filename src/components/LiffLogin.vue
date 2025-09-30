@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import HeaderMenu from './components/HeaderMenu.vue';
+import HeaderMenu from '../components/HeaderMenu.vue';
 import liff from '@line/liff';
 
 export default {

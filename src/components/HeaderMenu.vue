@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        <!-- <img src="/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> -->
         MyApp
       </a>
 
