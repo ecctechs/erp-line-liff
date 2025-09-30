@@ -11,11 +11,6 @@
     <button class="btn btn-success">
       <i class="fa-solid fa-check"></i> Bootstrap Button
     </button>
-
-    <div class="mt-4">
-      <i class="fa-solid fa-heart fa-2x text-danger"></i>
-      <i class="fa-solid fa-star fa-2x text-warning"></i>
-    </div>
     
   </div>
 </template>
