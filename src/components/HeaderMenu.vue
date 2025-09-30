@@ -1,14 +1,16 @@
 <template>
-  <div class="header-menu-mobile d-flex align-items-center p-2 bg-light">
+  <div class="header-menu-mobile d-flex align-items-center p-2 bg-light gap-2">
     <!-- รูปโปรไฟล์ -->
     <img
       v-if="profile && profile.pictureUrl"
       :src="profile.pictureUrl"
       alt="Profile"
-      class="rounded-circle me-2"
+      class="rounded-circle"
       width="40"
       height="40"
     />
+
+    <!-- ข้อความ greeting -->
     <div class="greeting">
       <span v-if="profile && profile.displayName">
         สวัสดี {{ profile.displayName }}
@@ -16,6 +18,9 @@
       <span v-else>
         สวัสดี ผู้ใช้งาน
       </span>
+      <div v-if="profile && profile.statusMessage" class="small text-muted">
+        {{ profile.statusMessage }}
+      </div>
     </div>
 
     <!-- ปุ่ม Login (ถ้าไม่มี profile) -->
