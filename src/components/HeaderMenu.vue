@@ -1,27 +1,32 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <!-- <img src="/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> -->
-        MyApp
-      </a>
-
-      <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#">หน้าแรก</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">สินค้า</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">รายงาน</a></li>
-        </ul>
-
-        <!-- แสดง profile -->
-        <div class="d-flex align-items-center">
-          <img v-if="profile" :src="profile.pictureUrl" alt="Profile" class="rounded-circle me-2" width="40" height="40">
-          <span v-if="profile" class="fw-bold">{{ profile.displayName }}</span>
-          <button v-else class="btn btn-outline-primary btn-sm" @click="login">Login</button>
-        </div>
-      </div>
+  <div class="header-menu-mobile d-flex align-items-center p-2 bg-light">
+    <!-- รูปโปรไฟล์ -->
+    <img
+      v-if="profile && profile.pictureUrl"
+      :src="profile.pictureUrl"
+      alt="Profile"
+      class="rounded-circle me-2"
+      width="40"
+      height="40"
+    />
+    <div class="greeting">
+      <span v-if="profile && profile.displayName">
+        สวัสดี {{ profile.displayName }}
+      </span>
+      <span v-else>
+        สวัสดี ผู้ใช้งาน
+      </span>
     </div>
-  </nav>
+
+    <!-- ปุ่ม Login (ถ้าไม่มี profile) -->
+    <button
+      v-if="!profile"
+      @click="login"
+      class="btn btn-sm btn-primary ms-auto"
+    >
+      เข้าสู่ระบบ
+    </button>
+  </div>
 </template>
 
 <script>
@@ -40,3 +45,18 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.header-menu-mobile {
+  height: 60px;
+}
+
+.header-menu-mobile img {
+  object-fit: cover;
+}
+
+.greeting {
+  font-weight: 500;
+  font-size: 1rem;
+}
+</style>
