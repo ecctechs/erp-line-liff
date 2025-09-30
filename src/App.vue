@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LiffLogin liff-id="YOUR_LIFF_ID_HERE" />
+    <LiffLogin liff-id="2008202406-5BYrEdBE" />
   </div>
 </template>
 
