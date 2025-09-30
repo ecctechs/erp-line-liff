@@ -69,7 +69,12 @@ export default {
     }
   },
   mounted() {
-    this.initLiff()
+    const checkLiff = setInterval(() => {
+        if (window.liff) {
+        clearInterval(checkLiff)
+        this.initLiff()
+        }
+    }, 100)
   }
 }
 </script>
