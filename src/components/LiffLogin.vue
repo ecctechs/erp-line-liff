@@ -1,70 +1,71 @@
 <template>
-  <div class="liff-container">
-    <div v-if="loading" class="status-message">
+  <div>
+    <!-- กรณีโหลดข้อมูล LIFF -->
+    <div v-if="loading" class="liff-container status-message">
       <p>🚀 กำลังเตรียมข้อมูล LIFF...</p>
     </div>
 
-    <div v-else-if="error" class="status-message error">
+    <!-- กรณีเกิดข้อผิดพลาด -->
+    <div v-else-if="error" class="liff-container status-message error">
       <p>เกิดข้อผิดพลาด:</p>
       <p>{{ error }}</p>
     </div>
 
-    <div v-else-if="profile" class="profile-card">
-      <img :src="profile.pictureUrl" alt="Profile Picture" class="profile-image" />
-      <h2 class="display-name">สวัสดี, {{ profile.displayName }}!</h2>
-      <p class="user-id">User ID: {{ profile.userId }}</p>
-    </div>
-    
-    <div v-else class="status-message">
+    <!-- กรณี Login สำเร็จ -->
+    <HeaderMenu v-else-if="profile" :profile="profile" />
+
+    <!-- กรณียังไม่ Login -->
+    <div v-else class="liff-container status-message">
       <p>กรุณา Login ผ่าน LINE</p>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
+<script>
+import HeaderMenu from './components/HeaderMenu.vue';
 import liff from '@line/liff';
 
-// LIFF ID ของคุณ
-const liffId = '2008202406-5BYrEdBE';
+export default {
+  name: 'LiffLogin',
+  components: { HeaderMenu },
+  data() {
+    return {
+      liffId: '2008202406-5BYrEdBE',
+      profile: null,
+      error: null,
+      loading: true
+    };
+  },
 
-// สร้าง Reactive State สำหรับเก็บข้อมูล
-const profile = ref(null);
-const error = ref(null);
-const loading = ref(true);
+  methods: {
+    async initLiff() {
+      try {
+        console.log('เริ่มต้นการทำงานของ LIFF...');
+        await liff.init({ liffId: this.liffId });
+        console.log('LIFF initialised');
 
-// onMounted จะทำงานเมื่อ Component ถูกสร้างขึ้น
-onMounted(async () => {
-  try {
-    console.log('เริ่มต้นการทำงานของ LIFF...');
-    
-    // 1. เริ่มต้น LIFF (Initialize)
-    await liff.init({ liffId });
-    console.log('LIFF initialised');
-
-    // 2. ตรวจสอบสถานะการ Login
-    if (!liff.isLoggedIn()) {
-      console.log('ผู้ใช้ยังไม่ได้ Login, กำลังจะ redirect...');
-      // ถ้ายังไม่ Login, LIFF จะเปิดหน้า Login ของ LINE ให้เอง
-      // ไม่ต้องเขียนโค้ดเพิ่มเติมในส่วนนี้ เพราะ liff.login() จะ redirect ทั้งหน้าจอ
-      liff.login();
-    } else {
-      console.log('ผู้ใช้ Login อยู่แล้ว, กำลังดึงข้อมูลโปรไฟล์...');
-      // 3. ถ้า Login แล้ว, ดึงข้อมูลโปรไฟล์
-      const userProfile = await liff.getProfile();
-      console.log('ดึงข้อมูลโปรไฟล์สำเร็จ:', userProfile);
-      
-      // 4. นำข้อมูลที่ได้ไปเก็บใน State
-      profile.value = userProfile;
+        if (!liff.isLoggedIn()) {
+          console.log('ผู้ใช้ยังไม่ได้ Login, กำลัง redirect...');
+          liff.login();
+        } else {
+          console.log('ผู้ใช้ Login อยู่แล้ว, กำลังดึงข้อมูลโปรไฟล์...');
+          const userProfile = await liff.getProfile();
+          console.log('ดึงข้อมูลโปรไฟล์สำเร็จ:', userProfile);
+          this.profile = userProfile;
+        }
+      } catch (err) {
+        console.error('เกิดข้อผิดพลาดในการทำงานของ LIFF:', err);
+        this.error = err.message;
+      } finally {
+        this.loading = false;
+      }
     }
-  } catch (err) {
-    console.error('เกิดข้อผิดพลาดในการทำงานของ LIFF:', err);
-    error.value = err.message;
-  } finally {
-    // เมื่อทำงานเสร็จ (ไม่ว่าจะสำเร็จหรือล้มเหลว) ให้ปิดสถานะ Loading
-    loading.value = false;
+  },
+
+  mounted() {
+    this.initLiff();
   }
-});
+};
 </script>
 
 <style scoped>
@@ -75,35 +76,6 @@ onMounted(async () => {
   align-items: center;
   height: 80vh;
   text-align: center;
-}
-
-.profile-card {
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  max-width: 300px;
-}
-
-.profile-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 4px solid #00c300;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
-
-.display-name {
-  margin: 10px 0;
-  font-size: 1.5em;
-  color: #333;
-}
-
-.user-id {
-  font-size: 0.9em;
-  color: #777;
-  word-wrap: break-word;
 }
 
 .status-message {

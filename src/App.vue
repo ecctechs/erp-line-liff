@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <header>
-      <h1>My LIFF App</h1>
-    </header>
     <main>
       <LiffLogin />
     </main>
