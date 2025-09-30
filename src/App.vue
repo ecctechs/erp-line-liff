@@ -4,7 +4,7 @@
 <template>
   <div class="container text-center mt-5">
     <h1 class="text-primary mb-4">
-      Hello Vite + Vue + Bootstrap + Font Awesome
+      Hello Vite + Vue + Bootstrap + Font Awesome 555
       <i class="fa-solid fa-rocket"></i>
     </h1>
 
