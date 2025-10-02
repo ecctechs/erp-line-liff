@@ -121,6 +121,7 @@ export default {
   data() {
     return {
       profile :[],
+      userData:[],
       email: "",
       otp: "",
       step: "email", // email | otp | success
@@ -178,7 +179,8 @@ export default {
 
         localStorage.setItem("userData", JSON.stringify(data));
         const userData = localStorage.getItem('userData');
-        console.log("userData",userData)
+        this.userData = userData;
+        console.log("userData",this.userData)
 
 
         if (!res.ok) {
