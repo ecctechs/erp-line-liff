@@ -5,13 +5,13 @@
         <!-- optional header with LIFF profile -->
 
         <!-- {{this.profile}} -->
-        <div v-if="profile" class="d-flex align-items-center mb-3 gap-2">
+        <!-- <div v-if="profile" class="d-flex align-items-center mb-3 gap-2">
           <img :src="profile.pictureUrl" class="rounded-circle border border-2 border-success" width="48" height="48" alt="profile" />
           <div>
             <div class="fw-semibold">สวัสดี {{ profile.displayName }}</div>
             <div v-if="profile.statusMessage" class="small text-muted">{{ profile.statusMessage }}</div>
           </div>
-        </div>
+        </div> -->
 
         <h5 class="card-title text-center mb-2">ยืนยันธุรกิจของคุณ</h5>
         <p class="card-text text-center text-muted mb-4">กรุณากรอกอีเมล์เพื่อรับรหัส OTP สำหรับยืนยันธุรกิจ</p>
