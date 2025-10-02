@@ -7,11 +7,13 @@
 </template>
 
 <script>
-import HeaderMenu from './components/HeaderMenu.vue'; 
+import HeaderMenu from '../components/HeaderMenu.vue'; 
 
 export default {
   name: "Dashboard",
-  components: HeaderMenu ,
+  components: {
+    HeaderMenu
+  },
 };
 </script>
 
