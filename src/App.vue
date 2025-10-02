@@ -1,12 +1,12 @@
 <template>
  <div>
-    <LiffLogin />
+     <router-view />
  </div>
 </template>
 
 <script setup>
 // Import Component ที่เราสร้างไว้
-import LiffLogin from './views/LiffLogin.vue'; 
+// import Dashboard from './views/Dashboard.vue'; 
 </script>
 
 <style>
