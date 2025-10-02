@@ -58,11 +58,13 @@ export default {
           localStorage.setItem('profile', JSON.stringify(userProfile));
 
           const userData = localStorage.getItem('userData');
-          
+
           if(userData){
+            console.log("Dashboard")
                 this.$router.push({ name: "Dashboard" });
           }else{
                 this.$router.push({ name: "RegisterBusiness" });
+                 console.log("RegisterBusiness")
           }
 
         }
