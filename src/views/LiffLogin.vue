@@ -14,9 +14,9 @@
     <!-- <RegisterBusiness v-else-if="profile" /> -->
 
     <!-- กรณียังไม่ Login -->
-    <div v-else class="liff-container status-message">
+    <!-- <div v-else class="liff-container status-message">
       <p>กรุณา Login ผ่าน LINE</p>
-    </div>
+    </div> -->
 
     <!-- <RegisterBusiness /> -->
 </template>
@@ -52,21 +52,21 @@ export default {
         } else {
           console.log('ผู้ใช้ Login อยู่แล้ว, กำลังดึงข้อมูลโปรไฟล์...');
           const userProfile = await liff.getProfile();
-          console.log('ดึงข้อมูลโปรไฟล์สำเร็จ+++++:', userProfile);
+          console.log('ดึงข้อมูลโปรไฟล์สำเร็จ:', userProfile);
           this.profile = userProfile;
 
           localStorage.setItem('profile', JSON.stringify(userProfile));
 
           const userData = localStorage.getItem('userData');
-          console.log("userData",userData)
+        //   console.log("userData",userData)
 
-          if(userData){
-            console.log("Dashboard")
-            this.$router.push("/dashboard");
-          }else{
-            console.log("RegisterBusiness")
-            this.$router.push("/register");
-          }
+        //   if(userData){
+        //     console.log("Dashboard")
+        //     this.$router.push("/dashboard");
+        //   }else{
+        //     console.log("RegisterBusiness")
+        //     this.$router.push("/register");
+        //   }
 
         }
       } catch (err) {
