@@ -181,7 +181,7 @@ export default {
         const userData = localStorage.getItem('userData');
         this.userData = userData;
         console.log(this.userData)
-         console.log(this.userData.userEmail)
+         console.log(this.userData.data.userEmail)
 
 
         if (!res.ok) {
