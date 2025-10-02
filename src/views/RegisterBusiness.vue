@@ -177,6 +177,7 @@ export default {
         const data = await res.json();
 
         localStorage.setItem("userData", JSON.stringify(data));
+        const userData = localStorage.getItem('userData');
         console.log("userData",userData)
 
 
