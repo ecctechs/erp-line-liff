@@ -176,6 +176,8 @@ export default {
 
         const data = await res.json();
 
+        console.log(data)
+
         if (!res.ok) {
           throw new Error(data.message || "ตรวจสอบอีเมล์ไม่สำเร็จ");
         }
