@@ -26,7 +26,6 @@ import HeaderMenu from '../components/HeaderMenu.vue';
 import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
 
-import router from "@/router";
 
 export default {
   name: 'LiffLogin',
@@ -63,10 +62,12 @@ export default {
 
           if(userData){
             console.log("Dashboard")
-                router.push({ name: "Dashboard" });
+                // router.push({ name: "Dashboard" });
+                this.$router.push("/dashboard");
           }else{
-                router.push({ name: "RegisterBusiness" });
+                // router.push({ name: "RegisterBusiness" });
                  console.log("RegisterBusiness")
+                 this.$router.push("/dashboard");
           }
 
         }

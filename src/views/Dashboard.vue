@@ -1,14 +1,19 @@
+<!-- src/views/DashboardVue.vue -->
 <template>
- <div>
-    <h1>GGG</h1>
- </div>
+  <div>
+    <h2>Dashboard</h2>
+    <p>ยินดีต้อนรับเข้าสู่ Dashboard</p>
+  </div>
 </template>
 
-<script setup>
-// Import Component ที่เราสร้างไว้
-
+<script>
+export default {
+  name: "DashboardVue"
+};
 </script>
 
-<style>
-
+<style scoped>
+h2 {
+  color: #333;
+}
 </style>
