@@ -58,6 +58,7 @@ export default {
           localStorage.setItem('profile', JSON.stringify(userProfile));
 
           const userData = localStorage.getItem('userData');
+          console.log(userData)
 
           if(userData){
             console.log("Dashboard")
