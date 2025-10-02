@@ -4,7 +4,7 @@
       <div class="card-body">
         <!-- optional header with LIFF profile -->
 
-        {{this.profile}}
+        <!-- {{this.profile}} -->
         <div v-if="profile" class="d-flex align-items-center mb-3 gap-2">
           <img :src="profile.pictureUrl" class="rounded-circle border border-2 border-success" width="48" height="48" alt="profile" />
           <div>
@@ -117,22 +117,7 @@
 
 <script>
 export default {
-  name: "EmailOtpVerification",
-  props: {
-    profile: {
-      type: Object,
-      default: null
-    },
-    // หากมี backend ให้ใส่ url-api ที่นี่ (optional)
-    sendOtpUrl: {
-      type: String,
-      default: "" // e.g. "/api/send-otp"
-    },
-    verifyOtpUrl: {
-      type: String,
-      default: "" // e.g. "/api/verify-otp"
-    }
-  },
+  name: "RegisterBusiness",
   data() {
     return {
       profile :[],
