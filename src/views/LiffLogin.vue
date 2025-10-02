@@ -18,11 +18,14 @@
     <div v-else class="liff-container status-message">
       <p>กรุณา Login ผ่าน LINE</p>
     </div>
+
+    <RegisterBusiness  />
   </div>
 </template>
 
 <script>
 import HeaderMenu from '../components/HeaderMenu.vue';
+import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
 
 export default {
