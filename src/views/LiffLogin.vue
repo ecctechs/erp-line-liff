@@ -60,13 +60,13 @@ export default {
           const userData = localStorage.getItem('userData');
         //   console.log("userData",userData)
 
-        //   if(userData){
-        //     console.log("Dashboard")
-        //     this.$router.push("/dashboard");
-        //   }else{
-        //     console.log("RegisterBusiness")
-        //     this.$router.push("/register");
-        //   }
+          if(userData){
+            console.log("Dashboard")
+            this.$router.push("/dashboard");
+          }else{
+            console.log("RegisterBusiness")
+            this.$router.push("/register");
+          }
 
         }
       } catch (err) {
