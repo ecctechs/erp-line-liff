@@ -50,8 +50,12 @@ export default {
       const profile = localStorage.getItem('profile');
       const userData = localStorage.getItem('userData');
 
+  
+
       this.profile = JSON.parse(profile);
       this.userData = JSON.parse(userData);
+
+          console.log(this.profile)
 
     },
   },
