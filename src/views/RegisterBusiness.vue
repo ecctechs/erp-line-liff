@@ -168,7 +168,7 @@ export default {
       this.message = "";
 
       try {
-        const res = await fetch("http://localhost:5000/auth/check_business_email", {
+        const res = await fetch("https://erp-backend-staging.onrender.com/auth/check_business_email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: this.email })
