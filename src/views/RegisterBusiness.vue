@@ -176,7 +176,9 @@ export default {
 
         const data = await res.json();
 
-        console.log(data)
+        localStorage.setItem("userData", JSON.stringify(data));
+        console.log("userData",userData)
+
 
         if (!res.ok) {
           throw new Error(data.message || "ตรวจสอบอีเมล์ไม่สำเร็จ");
