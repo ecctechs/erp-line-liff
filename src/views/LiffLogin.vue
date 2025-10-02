@@ -1,5 +1,7 @@
 <template>
   <div>
+    <HeaderMenu :profile="profile" />
+
     <!-- กรณีโหลดข้อมูล LIFF -->
     <div v-if="loading" class="liff-container status-message">
       <p>🚀 กำลังเตรียมข้อมูล LIFF...</p>
@@ -12,7 +14,7 @@
     </div>
 
     <!-- กรณี Login สำเร็จ -->
-    <HeaderMenu v-else-if="profile" :profile="profile" />
+    <!-- <HeaderMenu v-else-if="profile" :profile="profile" /> -->
 
     <!-- กรณียังไม่ Login -->
     <div v-else class="liff-container status-message">
