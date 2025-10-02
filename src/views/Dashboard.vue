@@ -1,4 +1,3 @@
-<!-- src/views/DashboardVue.vue -->
 <template>
   <div>
     <h2>Dashboard</h2>
@@ -8,7 +7,7 @@
 
 <script>
 export default {
-  name: "DashboardVue"
+  name: "Dashboard"
 };
 </script>
 

@@ -11,7 +11,7 @@
     </div>
 
     <!-- กรณี Login สำเร็จ -->
-    <RegisterBusiness v-else-if="profile" />
+    <!-- <RegisterBusiness v-else-if="profile" /> -->
 
     <!-- กรณียังไม่ Login -->
     <div v-else class="liff-container status-message">
@@ -62,12 +62,10 @@ export default {
 
           if(userData){
             console.log("Dashboard")
-                // router.push({ name: "Dashboard" });
-                this.$router.push("/dashboard");
+            this.$router.push("/dashboard");
           }else{
-                // router.push({ name: "RegisterBusiness" });
-                 console.log("RegisterBusiness")
-                 this.$router.push("/dashboard");
+            console.log("RegisterBusiness")
+            this.$router.push("/register");
           }
 
         }
