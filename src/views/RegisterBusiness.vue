@@ -174,6 +174,8 @@ export default {
           body: JSON.stringify({ email: this.email })
         });
 
+        console.log("--->",data)
+
         const data = await res.json();
 
         if (!res.ok) {
