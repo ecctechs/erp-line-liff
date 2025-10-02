@@ -180,7 +180,8 @@ export default {
         localStorage.setItem("userData", JSON.stringify(data));
         const userData = localStorage.getItem('userData');
         this.userData = userData;
-        console.log("userData",this.userData)
+        console.log(this.userData)
+         console.log(this.userData.userEmail)
 
 
         if (!res.ok) {
