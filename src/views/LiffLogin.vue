@@ -1,5 +1,4 @@
 <template>
-  <div>  
     <!-- กรณีโหลดข้อมูล LIFF -->
     <div v-if="loading" class="liff-container status-message">
       <p>🚀 กำลังเตรียมข้อมูล LIFF...</p>
@@ -19,7 +18,7 @@
       <p>กรุณา Login ผ่าน LINE</p>
     </div>
 
-  </div>
+    <RegisterBusiness />
 </template>
 
 <script>
@@ -56,8 +55,6 @@ export default {
           this.profile = userProfile;
 
           localStorage.setItem('profile', JSON.stringify(userProfile));
-
-          this.$router.push({ name: 'RegisterBusiness' });
 
         }
       } catch (err) {
