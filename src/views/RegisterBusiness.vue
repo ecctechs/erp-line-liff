@@ -175,16 +175,15 @@ export default {
         });
 
         const data = await res.json();
-        console.log("--->",data)
 
         if (!res.ok) {
           throw new Error(data.message || "ตรวจสอบอีเมล์ไม่สำเร็จ");
         }
 
-        console.log("Business ID:", data.data.business_id);
+        console.log("Business ID:", data.data.bus_id);
 
         // return ค่า business_id ให้เรียกใช้ต่อ
-        return data.data.business_id;
+        return data.data.bus_id;
 
       } catch (err) {
         console.error(err);
