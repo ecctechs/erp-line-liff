@@ -25,7 +25,6 @@
 import HeaderMenu from '../components/HeaderMenu.vue';
 import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
-import DashboardVue from '../components/Dashboard.vue';
 
 export default {
   name: 'LiffLogin',
