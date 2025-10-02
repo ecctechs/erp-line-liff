@@ -30,7 +30,7 @@ import liff from '@line/liff';
 
 export default {
   name: 'LiffLogin',
-  components: { HeaderMenu },
+  components: { HeaderMenu , RegisterBusiness },
   data() {
     return {
       liffId: '2008202406-5BYrEdBE',
