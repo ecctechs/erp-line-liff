@@ -26,7 +26,7 @@ import HeaderMenu from '../components/HeaderMenu.vue';
 import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
 
-import router from "../router";
+import router from "@/router";
 
 export default {
   name: 'LiffLogin',
