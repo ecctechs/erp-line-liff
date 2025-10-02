@@ -1,15 +1,14 @@
 <template>
  <div>
-    <RegisterBusiness />
+    <LiffLogin />
  </div>
 </template>
 
 <script setup>
 // Import Component ที่เราสร้างไว้
-import LiffLogin from './components/LiffLogin.vue'; 
-import HeaderMenu from './components/HeaderMenu.vue'; 
-import RegisterBusiness from './components/RegisterBusiness.vue'; 
-
+import LiffLogin from './views/LiffLogin.vue'; 
+// import HeaderMenu from './components/HeaderMenu.vue'; 
+// import RegisterBusiness from './view/RegisterBusiness.vue'; 
 </script>
 
 <style>

@@ -164,29 +164,69 @@ export default {
     }
   },
   methods: {
-    async onSendOtp() {
-      if (!this.isValidEmail) {
-        this.showMessage("กรุณากรอกอีเมล์ที่ถูกต้อง", "danger");
-        return;
+    async CheckBusinessEmail(){
+        if (!this.email) {
+        this.showMessage("กรุณากรอกอีเมล์", "danger");
+        return null;
       }
 
       this.loading = true;
       this.message = "";
 
       try {
+        const res = await fetch("http://localhost:5000/auth/check_business_email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: this.email })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "ตรวจสอบอีเมล์ไม่สำเร็จ");
+        }
+
+        console.log("Business ID:", data.data.business_id);
+
+        // return ค่า business_id ให้เรียกใช้ต่อ
+        return data.data.business_id;
+
+      } catch (err) {
+        console.error(err);
+        this.showMessage(err.message || "เกิดข้อผิดพลาดขณะตรวจสอบอีเมล์", "danger");
+        return null;
+      } finally {
+        this.loading = false;
+      }
+    },
+    async onSendOtp() {
+        if (!this.isValidEmail) {
+        this.showMessage("กรุณากรอกอีเมล์ที่ถูกต้อง", "danger");
+        return;
+      }
+
+      this.loading = true;
+
+      // ตรวจสอบ business email
+      const businessId = await this.CheckBusinessEmail();
+      if (!businessId) {
+        this.showMessage("ไม่พบธุรกิจสำหรับอีเมล์นี้", "danger");
+        this.loading = false;
+        return;
+      }
+
+      // ถ้าเจอ businessId ต่อด้วยส่ง OTP
+      try {
         if (this.USE_LOCAL_SIM) {
-          // simulate backend: generate OTP and "send"
           const simulatedOtp = this._generateLocalOtp();
-          console.log("[SIMULATED OTP]", simulatedOtp); // dev only
-          // Store hashed? For demo just keep in-memory
-          window.__SIM_OTP = { email: this.email, otp: simulatedOtp };
-          this.startOtpCountdown(180); // 3 minutes
+          console.log("[SIMULATED OTP]", simulatedOtp);
+          window.__SIM_OTP = { email: this.email, otp: simulatedOtp, businessId };
+          this.startOtpCountdown(180);
           this.startResendCooldown(30);
           this.step = "otp";
-          this.showMessage("ส่งรหัส OTP เรียบร้อย โปรดตรวจสอบอีเมล์ (ดู console สำหรับโหมดทดสอบ)", "info");
+          this.showMessage("ส่งรหัส OTP เรียบร้อย โปรดตรวจสอบอีเมล์", "info");
         } else {
-          // real backend request
-          const payload = { email: this.email, userId: this.profile?.userId || null };
+          const payload = { email: this.email, businessId };
           const res = await fetch(this.sendOtpUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -194,7 +234,6 @@ export default {
           });
           const data = await res.json();
           if (!res.ok) throw new Error(data.message || "ส่ง OTP ไม่สำเร็จ");
-          // backend should return ttlSeconds or similar
           const ttl = data.ttlSeconds || 180;
           this.startOtpCountdown(ttl);
           this.startResendCooldown(30);
@@ -208,7 +247,6 @@ export default {
         this.loading = false;
       }
     },
-
     async onVerifyOtp() {
       if (this.otp.length !== this.otpLength) {
         this.showMessage(`กรุณากรอก OTP ให้ครบ ${this.otpLength} หลัก`, "danger");
@@ -221,6 +259,14 @@ export default {
       try {
         if (this.USE_LOCAL_SIM) {
           const sim = window.__SIM_OTP;
+
+          if (this.otp === "111111") {
+            this.clearTimers();
+            this.step = "success";
+            this.showMessage("ยืนยันสำเร็จ (SIM 111111)", "success");
+            return;
+          }
+
           if (!sim || sim.email !== this.email) {
             throw new Error("ไม่มีรหัสทดสอบ หรืออีเมล์ไม่ตรง");
           }
