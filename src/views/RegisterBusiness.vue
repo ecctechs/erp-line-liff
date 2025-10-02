@@ -3,6 +3,8 @@
     <div class="card shadow p-4 w-100 mx-2" style="max-width: 420px; border-radius: 12px;">
       <div class="card-body">
         <!-- optional header with LIFF profile -->
+
+        {{this.profile}}
         <div v-if="profile" class="d-flex align-items-center mb-3 gap-2">
           <img :src="profile.pictureUrl" class="rounded-circle border border-2 border-success" width="48" height="48" alt="profile" />
           <div>

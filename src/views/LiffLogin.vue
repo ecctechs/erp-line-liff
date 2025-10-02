@@ -11,14 +11,14 @@
     </div>
 
     <!-- กรณี Login สำเร็จ -->
-    <!-- <HeaderMenu v-else-if="profile" :profile="profile" /> -->
+    <RegisterBusiness v-else-if="profile" />
 
     <!-- กรณียังไม่ Login -->
     <div v-else class="liff-container status-message">
       <p>กรุณา Login ผ่าน LINE</p>
     </div>
 
-    <RegisterBusiness />
+    <!-- <RegisterBusiness /> -->
 </template>
 
 <script>
