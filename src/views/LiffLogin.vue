@@ -52,13 +52,13 @@ export default {
         } else {
           console.log('ผู้ใช้ Login อยู่แล้ว, กำลังดึงข้อมูลโปรไฟล์...');
           const userProfile = await liff.getProfile();
-          console.log('ดึงข้อมูลโปรไฟล์สำเร็จ:', userProfile);
+          console.log('ดึงข้อมูลโปรไฟล์สำเร็จ+++++:', userProfile);
           this.profile = userProfile;
 
           localStorage.setItem('profile', JSON.stringify(userProfile));
 
           const userData = localStorage.getItem('userData');
-          console.log(userData)
+          console.log("userData",userData)
 
           if(userData){
             console.log("Dashboard")
