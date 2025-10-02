@@ -54,6 +54,9 @@ export default {
       this.userData = JSON.parse(userData);
 
     },
+  },
+  getProfile() {
+    this.getProfile();
   }
 };
 </script>
