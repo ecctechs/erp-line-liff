@@ -12,14 +12,13 @@
     </div>
 
     <!-- กรณี Login สำเร็จ -->
-    <HeaderMenu v-else-if="profile" :profile="profile" />
+    <!-- <HeaderMenu v-else-if="profile" :profile="profile" /> -->
 
     <!-- กรณียังไม่ Login -->
     <div v-else class="liff-container status-message">
       <p>กรุณา Login ผ่าน LINE</p>
     </div>
 
-    <RegisterBusiness  />
   </div>
 </template>
 
@@ -55,6 +54,11 @@ export default {
           const userProfile = await liff.getProfile();
           console.log('ดึงข้อมูลโปรไฟล์สำเร็จ:', userProfile);
           this.profile = userProfile;
+
+          localStorage.setItem('profile', JSON.stringify(userProfile));
+
+          this.$router.push({ name: 'RegisterBusiness' });
+
         }
       } catch (err) {
         console.error('เกิดข้อผิดพลาดในการทำงานของ LIFF:', err);

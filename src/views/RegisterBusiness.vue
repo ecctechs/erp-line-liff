@@ -133,6 +133,7 @@ export default {
   },
   data() {
     return {
+      profile :[],
       email: "",
       otp: "",
       step: "email", // email | otp | success
@@ -164,6 +165,12 @@ export default {
     }
   },
   methods: {
+    async GetProfileFormLine(){
+        const savedProfile = localStorage.getItem('profile');
+        if (savedProfile) {
+        this.profile = JSON.parse(savedProfile);
+        }
+    },
     async CheckBusinessEmail(){
         if (!this.email) {
         this.showMessage("กรุณากรอกอีเมล์", "danger");
@@ -385,6 +392,9 @@ export default {
 
   beforeUnmount() {
     this.clearTimers();
+  },
+  mounted() {
+    this.GetProfileFormLine();
   }
 };
 </script>
