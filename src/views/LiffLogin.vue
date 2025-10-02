@@ -25,6 +25,7 @@
 import HeaderMenu from '../components/HeaderMenu.vue';
 import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
+import DashboardVue from '../components/Dashboard.vue';
 
 export default {
   name: 'LiffLogin',
@@ -55,6 +56,14 @@ export default {
           this.profile = userProfile;
 
           localStorage.setItem('profile', JSON.stringify(userProfile));
+
+          const userData = localStorage.getItem('userData');
+          
+          if(userData){
+                this.$router.push({ name: "Dashboard" });
+          }else{
+                this.$router.push({ name: "RegisterBusiness" });
+          }
 
         }
       } catch (err) {

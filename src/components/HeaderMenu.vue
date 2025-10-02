@@ -36,17 +36,24 @@
 
 <script>
 export default {
-  name: "HeaderMenu",
-  props: {
-    profile: {
-      type: Object,
-      default: null
+  data() {
+    return {
+      profile:[],
+      userData:[]
     }
   },
   methods: {
     login() {
       if (window.liff) window.liff.login();
-    }
+    },
+    getProfile(){
+      const profile = localStorage.getItem('profile');
+      const userData = localStorage.getItem('userData');
+
+      this.profile = JSON.parse(profile);
+      this.userData = JSON.parse(userData);
+
+    },
   }
 };
 </script>
