@@ -24,6 +24,10 @@
       </tbody>
     </table>
   </div>
+
+  {{this.product}}
+  {{this.customer}}
+  {{this.company}}
 </template>
 
 <script>
