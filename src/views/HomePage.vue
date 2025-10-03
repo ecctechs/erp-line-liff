@@ -1,9 +1,8 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue Dynamic Table + Dropdown</h3>
 
     <!-- Dropdown -->
-    <div class="mb-3 w-25">
+    <div class="mb-3 w-100">
       <select class="form-select" v-model="currentTable">
         <option value="product">Product</option>
         <option value="customer">Customer</option>
