@@ -3,11 +3,11 @@
     <h3>Vue + DataTables.js</h3>
 
     <!-- ปุ่มสลับ dataset -->
-    <!-- <div class="mb-3">
+    <div class="mb-3">
       <button class="btn btn-primary me-2" @click="switchTable('product')">Product</button>
       <button class="btn btn-success me-2" @click="switchTable('customer')">Customer</button>
       <button class="btn btn-info" @click="switchTable('company')">Company</button>
-    </div> -->
+    </div>
 
     <table id="example" class="table table-striped" style="width:100%">
       <thead>
@@ -123,9 +123,9 @@ export default {
     },
   },
   async mounted() {
-        await this.get_product();
-    // this.get_customer();
-    // this.get_company();
+    await this.get_product();
+    await this.get_customer();
+    await this.get_company();
 
     // initialize datatable หลัง render เสร็จ
     await this.$nextTick(() => {
