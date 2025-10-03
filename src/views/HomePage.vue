@@ -123,7 +123,7 @@ export default {
     },
   },
   mounted() {
-    // this.get_product();
+    this.get_product();
     // this.get_customer();
     // this.get_company();
 
