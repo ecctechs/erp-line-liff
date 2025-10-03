@@ -24,10 +24,6 @@
       </tbody>
     </table>
   </div>
-
-  {{this.product}}
-  {{this.customer}}
-  {{this.company}}
 </template>
 
 <script>
@@ -62,6 +58,7 @@ export default {
         const data = await res.json();
 
         this.product = data;
+        console.log("this.product",this.product)
     },
     async get_customer() {
         const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
@@ -72,6 +69,7 @@ export default {
         const data = await res.json();
 
         this.customer = data;
+        console.log("this.customer",this.customer)
     },
     async get_company() {
         const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
@@ -82,6 +80,7 @@ export default {
         const data = await res.json();
 
         this.company = data;
+        console.log("this.company",this.company)
     },
   },
   mounted() {
