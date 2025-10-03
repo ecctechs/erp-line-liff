@@ -1,47 +1,33 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue + DataTables.js</h3>
+    <h3>Vue Dynamic Table</h3>
 
     <!-- ปุ่มสลับ dataset -->
     <div class="mb-3">
-      <button class="btn btn-primary me-2" @click="switchTable('product')">Product</button>
-      <button class="btn btn-success me-2" @click="switchTable('customer')">Customer</button>
-      <button class="btn btn-info" @click="switchTable('company')">Company</button>
+      <button class="btn btn-primary me-2" @click="currentTable = 'product'">Product</button>
+      <button class="btn btn-success me-2" @click="currentTable = 'customer'">Customer</button>
+      <button class="btn btn-info" @click="currentTable = 'company'">Company</button>
     </div>
 
-    <table id="example" class="table table-striped" style="width:100%">
-      <thead>
-        <tr>
-          <th v-for="(col, index) in tableConfig[currentTable]" :key="index">
-            {{ col.label }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, rowIndex) in dataMap[currentTable]" :key="rowIndex">
-          <td v-for="(col, colIndex) in tableConfig[currentTable]" :key="colIndex">
-            {{ row[col.key] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- table component -->
+    <DynamicTable
+      :headers="tableConfig[currentTable]"
+      :data="dataMap[currentTable]"
+    />
   </div>
 </template>
 
 <script>
-import $ from "jquery";
-import "datatables.net-dt/css/dataTables.dataTables.css";
-import "datatables.net";
+import DynamicTable from "../components/DynamicTable.vue";
 
 export default {
+  components: { DynamicTable },
   data() {
     return {
-      currentTable: "product", // default
+      currentTable: "product",
       product: [],
       customer: [],
       company: [],
-
-      // 🔑 เก็บ config สำหรับ header
       tableConfig: {
         product: [
           { label: "รหัสสินค้า", key: "productID" },
@@ -52,13 +38,6 @@ export default {
           { label: "วันที่เพิ่ม", key: "product_date" },
           { label: "สถานะ", key: "Status" },
         ],
-        company: [
-          { label: "รหัสลูกค้า", key: "company_person_id" },
-          { label: "ชื่อลูกค้า", key: "company_person_name" },
-          { label: "เบอร์โทร", key: "company_person_tel" },
-          { label: "อีเมล", key: "company_person_email" },
-          { label: "สถานะ", key: "company_person_status" },
-        ],
         customer: [
           { label: "รหัสลูกค้า", key: "cus_id" },
           { label: "ชื่อลูกค้า", key: "cus_name" },
@@ -68,11 +47,17 @@ export default {
           { label: "เลขผู้เสียภาษี", key: "cus_tax" },
           { label: "สถานะ", key: "Status" },
         ],
+        company: [
+          { label: "รหัสลูกค้า", key: "company_person_id" },
+          { label: "ชื่อลูกค้า", key: "company_person_name" },
+          { label: "เบอร์โทร", key: "company_person_tel" },
+          { label: "อีเมล", key: "company_person_email" },
+          { label: "สถานะ", key: "company_person_status" },
+        ],
       },
     };
   },
   computed: {
-    // รวม data ให้เรียกง่าย
     dataMap() {
       return {
         product: this.product,
@@ -80,6 +65,11 @@ export default {
         company: this.company,
       };
     },
+  },
+  mounted() {
+    this.get_product();
+    this.get_customer();
+    this.get_company();
   },
   methods: {
     async get_product() {
@@ -90,7 +80,6 @@ export default {
       });
       const result = await res.json();
       this.product = result.data || [];
-      console.log(this.product)
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
@@ -110,27 +99,6 @@ export default {
       const result = await res.json();
       this.company = result.data || [];
     },
-
-    // reset DataTable เวลาเปลี่ยนตาราง
-    switchTable(table) {
-      this.currentTable = table;
-      this.$nextTick(() => {
-        if ($.fn.dataTable.isDataTable("#example")) {
-          $("#example").DataTable().destroy();
-        }
-        $("#example").DataTable();
-      });
-    },
-  },
-  async mounted() {
-    await this.get_product();
-    await this.get_customer();
-    await this.get_company();
-
-    // initialize datatable หลัง render เสร็จ
-    await this.$nextTick(() => {
-      $("#example").DataTable();
-    });
   },
 };
 </script>
