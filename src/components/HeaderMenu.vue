@@ -26,6 +26,7 @@
     <!-- ชื่อบริษัท -->
     <div v-if="userData && userData.data && userData.data.business"
          class="ms-auto text-end">
+      <span class="fw-semibold me-1">บริษัท :</span>
       <span class="fw-bold text-primary">
         {{ userData.data.business.bus_name }}
       </span>
