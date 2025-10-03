@@ -43,10 +43,8 @@ export default {
           console.log("profile",profile)
 
           if(userData && profile){
-            console.log("Dashboard")
             this.$router.push("/dashboard");
           }else{
-            console.log("RegisterBusiness")
             this.$router.push("/register");
           }
 

@@ -25,7 +25,7 @@ import DynamicTable from "../components/DynamicTable.vue";
 import HeaderMenu from "../components/HeaderMenu.vue";
 
 export default {
-  components: { DynamicTable },
+  components: { DynamicTable , HeaderMenu },
   data() {
     return {
       currentTable: "product",
