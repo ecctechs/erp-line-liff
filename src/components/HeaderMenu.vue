@@ -55,7 +55,7 @@ export default {
       this.profile = JSON.parse(profile);
       this.userData = JSON.parse(userData);
 
-          console.log(this.profile)
+      console.log(this.profile)
 
     },
   },

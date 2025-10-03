@@ -98,12 +98,6 @@
 
         <!-- Step success -->
         <div v-if="step === 'success'" class="text-center">
-          <div class="mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14z"/>
-              <path d="M10.97 5.97a.235.235 0 0 1 .02.022l-3.992 4.99L4.324 8.384a.25.25 0 0 1 .374-.336l2.35 2.02 3.412-4.25a.25.25 0 0 1 .512.134z"/>
-            </svg>
-          </div>
           <h6 class="mb-2">ยืนยันสำเร็จ</h6>
           <p class="text-muted small mb-3">ขอบคุณ! ระบบได้ยืนยันอีเมล์เรียบร้อย</p>
           <div class="d-grid">
@@ -315,6 +309,7 @@ export default {
     onFinish() {
       // emit success event to parent with email (or token if backend returned)
       this.$emit("verified", { email: this.email });
+      this.$router.push("/dashboard");
       // optional: reset
       // this.resetAll();
     },

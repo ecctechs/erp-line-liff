@@ -1,4 +1,5 @@
 <template>
+<HeaderMenu />
   <div class="container mt-4">
 
     <!-- Dropdown -->
@@ -21,6 +22,7 @@
 
 <script>
 import DynamicTable from "../components/DynamicTable.vue";
+import HeaderMenu from "../components/HeaderMenu.vue";
 
 export default {
   components: { DynamicTable },
