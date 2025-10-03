@@ -8,7 +8,6 @@
 
 <script>
 import liff from '@line/liff';
-import router from '../router';
 
 export default {
   name: 'LiffLogin',
@@ -38,9 +37,10 @@ export default {
           localStorage.setItem('profile', JSON.stringify(userProfile));
 
           const userData = localStorage.getItem('userData');
+          const profile = localStorage.getItem('profile');
           console.log("userData",userData)
 
-          if(userData){
+          if(userData && profile){
             console.log("Dashboard")
             this.$router.push("/dashboard");
           }else{
