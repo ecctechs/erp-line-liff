@@ -7,7 +7,7 @@ import Dashboard from "../views/Dashboard.vue";
 const routes = [
   { path: "/", name: "LiffLogin", component: LiffLogin },
   { path: "/register", name: "RegisterBusiness", component: RegisterBusiness },
-  { path: "/dashboard", name: "Dashboard", component: HomePage },
+  { path: "/dashboard", name: "Dashboard", component: Dashboard },
 ];
 
 const router = createRouter({
