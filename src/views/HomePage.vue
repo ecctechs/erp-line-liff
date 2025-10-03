@@ -1,18 +1,17 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue Dynamic Table</h3>
+    <h3>Vue Dynamic Table + Search + Pagination</h3>
 
-    <!-- ปุ่มสลับ dataset -->
     <div class="mb-3">
       <button class="btn btn-primary me-2" @click="currentTable = 'product'">Product</button>
       <button class="btn btn-success me-2" @click="currentTable = 'customer'">Customer</button>
       <button class="btn btn-info" @click="currentTable = 'company'">Company</button>
     </div>
 
-    <!-- table component -->
     <DynamicTable
       :headers="tableConfig[currentTable]"
       :data="dataMap[currentTable]"
+      :page-size="5"
     />
   </div>
 </template>
@@ -30,9 +29,13 @@ export default {
       company: [],
       tableConfig: {
         product: [
-          { label: "SKU", key: "productname" },
+          { label: "รหัสสินค้า", key: "productID" },
+          { label: "ชื่อสินค้า", key: "productname" },
+          { label: "รายละเอียด", key: "productdetail" },
           { label: "จำนวนคงเหลือ", key: "amount" },
           { label: "ราคา", key: "price" },
+          { label: "วันที่เพิ่ม", key: "product_date" },
+          { label: "สถานะ", key: "Status" },
         ],
         customer: [
           { label: "รหัสลูกค้า", key: "cus_id" },
@@ -41,12 +44,14 @@ export default {
           { label: "เบอร์โทร", key: "cus_tel" },
           { label: "อีเมล", key: "cus_email" },
           { label: "เลขผู้เสียภาษี", key: "cus_tax" },
+          { label: "สถานะ", key: "Status" },
         ],
         company: [
           { label: "รหัสลูกค้า", key: "company_person_id" },
           { label: "ชื่อลูกค้า", key: "company_person_name" },
           { label: "เบอร์โทร", key: "company_person_tel" },
           { label: "อีเมล", key: "company_person_email" },
+          { label: "สถานะ", key: "company_person_status" },
         ],
       },
     };
