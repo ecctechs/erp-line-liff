@@ -21,6 +21,7 @@ export default {
   methods: {
     async initLiff() {
       try {
+        localStorage.clear();
         console.log('เริ่มต้นการทำงานของ LIFF...');
         await liff.init({ liffId: this.liffId });
         console.log('LIFF initialised');
