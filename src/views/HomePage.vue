@@ -37,50 +37,7 @@ export default {
   data() {
     return {
       currentTable: "product", // default
-      product: [
-    {
-        "productID": 194,
-        "productTypeID": 2,
-        "categoryID": 67,
-        "productname": "EMS",
-        "productdetail": "",
-        "amount": 0,
-        "price": 50,
-        "productcost": 0,
-        "productImg": null,
-        "product_date": "2025-06-04",
-        "bus_id": 96,
-        "Status": "Discontinued"
-    },
-    {
-        "productID": 193,
-        "productTypeID": 1,
-        "categoryID": 67,
-        "productname": "สมาร์ตโฟนรุ่น X200",
-        "productdetail": "",
-        "amount": 0,
-        "price": 100,
-        "productcost": 0,
-        "productImg": null,
-        "product_date": "2025-05-30",
-        "bus_id": 96,
-        "Status": "not active"
-    },
-    {
-        "productID": 197,
-        "productTypeID": 1,
-        "categoryID": 67,
-        "productname": "45",
-        "productdetail": "435",
-        "amount": 0,
-        "price": 4543,
-        "productcost": 0,
-        "productImg": null,
-        "product_date": "2025-09-25",
-        "bus_id": 96,
-        "Status": "Discontinued"
-    }
-],
+      product: [],
       customer: [],
       company: [],
 
@@ -132,7 +89,7 @@ export default {
         body: JSON.stringify({ bus_id: "96" }),
       });
       const result = await res.json();
-      // this.product = result.data || [];
+      this.product = result.data || [];
       console.log(this.product)
     },
     async get_customer() {
@@ -165,15 +122,17 @@ export default {
       });
     },
   },
-  mounted() {
-    this.get_product();
+  async mounted() {
+    
     // this.get_customer();
     // this.get_company();
 
     // initialize datatable หลัง render เสร็จ
-    this.$nextTick(() => {
+    await this.$nextTick(() => {
       $("#example").DataTable();
     });
+
+    await this.get_product();
   },
 };
 </script>
