@@ -123,7 +123,7 @@ export default {
     },
   },
   async mounted() {
-    
+        await this.get_product();
     // this.get_customer();
     // this.get_company();
 
@@ -131,8 +131,6 @@ export default {
     await this.$nextTick(() => {
       $("#example").DataTable();
     });
-
-    await this.get_product();
   },
 };
 </script>
