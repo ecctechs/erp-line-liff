@@ -21,7 +21,6 @@ export default {
   methods: {
     async initLiff() {
       try {
-        localStorage.clear();
         console.log('เริ่มต้นการทำงานของ LIFF...');
         await liff.init({ liffId: this.liffId });
         console.log('LIFF initialised');
@@ -39,7 +38,9 @@ export default {
 
           const userData = localStorage.getItem('userData');
           const profile = localStorage.getItem('profile');
+          localStorage.removeItem('userData');
           console.log("userData",userData)
+          console.log("profile",profile)
 
           if(userData && profile){
             console.log("Dashboard")
