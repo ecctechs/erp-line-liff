@@ -1,25 +1,27 @@
 <template>
   <div class="container mt-4">
     <h3>Vue + DataTables.js</h3>
+
+    <!-- ปุ่มสลับ dataset -->
+    <div class="mb-3">
+      <button class="btn btn-primary me-2" @click="switchTable('product')">Product</button>
+      <button class="btn btn-success me-2" @click="switchTable('customer')">Customer</button>
+      <button class="btn btn-info" @click="switchTable('company')">Company</button>
+    </div>
+
     <table id="example" class="table table-striped" style="width:100%">
       <thead>
         <tr>
-          <th>ชื่อ</th>
-          <th>ตำแหน่ง</th>
-          <th>ออฟฟิศ</th>
-          <th>อายุ</th>
-          <th>วันที่เริ่ม</th>
-          <th>เงินเดือน</th>
+          <th v-for="(col, index) in tableConfig[currentTable]" :key="index">
+            {{ col.label }}
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in employees" :key="index">
-          <td>{{ item.name }}</td>
-          <td>{{ item.position }}</td>
-          <td>{{ item.office }}</td>
-          <td>{{ item.age }}</td>
-          <td>{{ item.start }}</td>
-          <td>{{ item.salary }}</td>
+        <tr v-for="(row, rowIndex) in dataMap[currentTable]" :key="rowIndex">
+          <td v-for="(col, colIndex) in tableConfig[currentTable]" :key="colIndex">
+            {{ row[col.key] }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -27,9 +29,6 @@
 </template>
 
 <script>
-// ต้องติดตั้ง datatables.net + jquery ก่อน
-// npm install jquery datatables.net datatables.net-dt
-
 import $ from "jquery";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import "datatables.net";
@@ -37,56 +36,96 @@ import "datatables.net";
 export default {
   data() {
     return {
-      product:[],
-      customer:[],
-      company:[],
-      employees: [
-        { name: "Tiger Nixon", position: "System Architect", office: "Edinburgh", age: 61, start: "2011/04/25", salary: "$320,800" },
-        { name: "Garrett Winters", position: "Accountant", office: "Tokyo", age: 63, start: "2011/07/25", salary: "$170,750" },
-        { name: "Ashton Cox", position: "Junior Technical Author", office: "San Francisco", age: 66, start: "2009/01/12", salary: "$86,000" },
-        { name: "Cedric Kelly", position: "Senior Javascript Developer", office: "Edinburgh", age: 22, start: "2012/03/29", salary: "$433,060" },
-      ],
+      currentTable: "product", // default
+      product: [],
+      customer: [],
+      company: [],
+
+      // 🔑 เก็บ config สำหรับ header
+      tableConfig: {
+        product: [
+          { label: "รหัสสินค้า", key: "productID" },
+          { label: "ชื่อสินค้า", key: "productname" },
+          { label: "รายละเอียด", key: "productdetail" },
+          { label: "จำนวนคงเหลือ", key: "amount" },
+          { label: "ราคา", key: "price" },
+          { label: "วันที่เพิ่ม", key: "product_date" },
+          { label: "สถานะ", key: "Status" },
+        ],
+        company: [
+          { label: "รหัสลูกค้า", key: "company_person_id" },
+          { label: "ชื่อลูกค้า", key: "company_person_name" },
+          { label: "เบอร์โทร", key: "company_person_tel" },
+          { label: "อีเมล", key: "company_person_email" },
+          { label: "สถานะ", key: "company_person_status" },
+        ],
+        customer: [
+          { label: "รหัสลูกค้า", key: "cus_id" },
+          { label: "ชื่อลูกค้า", key: "cus_name" },
+          { label: "ที่อยู่", key: "cus_address" },
+          { label: "เบอร์โทร", key: "cus_tel" },
+          { label: "อีเมล", key: "cus_email" },
+          { label: "เลขผู้เสียภาษี", key: "cus_tax" },
+          { label: "สถานะ", key: "Status" },
+        ],
+      },
     };
+  },
+  computed: {
+    // รวม data ให้เรียกง่าย
+    dataMap() {
+      return {
+        product: this.product,
+        customer: this.customer,
+        company: this.company,
+      };
+    },
   },
   methods: {
     async get_product() {
-        const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_product", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ bus_id: "96" })
-        });
-        const data = await res.json();
-
-        this.product = data;
-        console.log("this.product",this.product)
+      const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_product", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bus_id: "96" }),
+      });
+      const result = await res.json();
+      this.product = result.data || [];
     },
     async get_customer() {
-        const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ bus_id: "96" })
-        });
-        const data = await res.json();
-
-        this.customer = data;
-        console.log("this.customer",this.customer)
+      const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bus_id: "96" }),
+      });
+      const result = await res.json();
+      this.customer = result.data || [];
     },
     async get_company() {
-        const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ bus_id: "96" })
-        });
-        const data = await res.json();
+      const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bus_id: "96" }),
+      });
+      const result = await res.json();
+      this.company = result.data || [];
+    },
 
-        this.company = data;
-        console.log("this.company",this.company)
+    // reset DataTable เวลาเปลี่ยนตาราง
+    switchTable(table) {
+      this.currentTable = table;
+      this.$nextTick(() => {
+        if ($.fn.dataTable.isDataTable("#example")) {
+          $("#example").DataTable().destroy();
+        }
+        $("#example").DataTable();
+      });
     },
   },
   mounted() {
     this.get_product();
     this.get_customer();
     this.get_company();
+
     // initialize datatable หลัง render เสร็จ
     this.$nextTick(() => {
       $("#example").DataTable();
