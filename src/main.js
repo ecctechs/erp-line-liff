@@ -8,6 +8,8 @@ import "jquery";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 
+localStorage.clear();
+
 const app = createApp(App);
 app.use(router);
 app.mount("#app");
