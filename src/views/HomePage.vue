@@ -91,6 +91,7 @@ export default {
       const result = await res.json();
       this.product = result.data || [];
       console.log(this.product);
+      
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
@@ -131,6 +132,10 @@ export default {
     this.$nextTick(() => {
       $("#example").DataTable();
     });
+
+    console.log("DEBUG product:", Array.isArray(this.product), this.product);
+console.log("DEBUG customer:", Array.isArray(this.customer), this.customer);
+console.log("DEBUG company:", Array.isArray(this.company), this.company);
   },
 };
 </script>
