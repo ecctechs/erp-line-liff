@@ -21,14 +21,6 @@ if (savedVersion !== APP_VERSION) {
   localStorage.setItem('app_version', APP_VERSION); // บันทึก version ใหม่
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered:', reg.scope))
-      .catch(err => console.log('Service Worker registration failed:', err));
-  });
-}
-
 const app = createApp(App);
 app.use(router);
 app.mount("#app");
