@@ -109,8 +109,8 @@ export default {
       const userData = localStorage.getItem('userData');
       
 
-      this.profile = JSON.parse(userData);
-      console.log("--->",this.profile)
+      this.business_id = JSON.parse(userData);
+      console.log("--->",this.business_id)
 
     },
   },
