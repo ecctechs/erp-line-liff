@@ -53,7 +53,7 @@ export default {
       this.profile = JSON.parse(profile);
       this.userData = JSON.parse(userData);
 
-      console.log(this.userData.data)
+      console.log(this.userData.data.business)
     },
   },
   mounted() {
