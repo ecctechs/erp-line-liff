@@ -1,12 +1,7 @@
 <template>
 <HeaderMenu />
   <div class="container mt-4">
-
-    <div class="d-flex align-items-center mb-4">
-      <h5 class="me-2 fw-bold">บริษัท :</h5>
-      <span class="text-primary fs-5">xxxx</span>
-    </div>
-
+    
     <!-- Dropdown -->
     <div class="mb-3 w-100">
       <select class="form-select" v-model="currentTable">
