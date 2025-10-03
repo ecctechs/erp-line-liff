@@ -109,7 +109,7 @@ export default {
       const userData = localStorage.getItem('userData');
       
 
-      this.business_id = JSON.parse(userData.data.bus_id);
+      this.business_id = JSON.parse(userData.bus_id);
       console.log("--->",this.business_id)
 
     },

@@ -176,9 +176,6 @@ export default {
         if (!res.ok) {
           throw new Error(data.message || "ตรวจสอบอีเมล์ไม่สำเร็จ");
         }
-
-        console.log("Business ID:", data.data.bus_id);
-
         // return ค่า business_id ให้เรียกใช้ต่อ
         return data.data.bus_id;
 

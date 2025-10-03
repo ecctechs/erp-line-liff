@@ -38,9 +38,6 @@ export default {
 
           const userData = localStorage.getItem('userData');
           const profile = localStorage.getItem('profile');
-          // localStorage.removeItem('userData');
-          console.log("userData",userData)
-          console.log("profile",profile)
 
           if(userData && profile){
             this.$router.push("/dashboard");
