@@ -23,6 +23,14 @@
       </div>
     </div>
 
+    <!-- ชื่อบริษัท -->
+    <div v-if="userData && userData.data && userData.data.business"
+         class="ms-auto text-end">
+      <span class="fw-bold text-primary">
+        {{ userData.data.business.bus_name }}
+      </span>
+    </div>
+
     <!-- ปุ่ม Login (ถ้าไม่มี profile) -->
     <button
       v-if="!profile"
@@ -52,8 +60,6 @@ export default {
 
       this.profile = JSON.parse(profile);
       this.userData = JSON.parse(userData);
-
-      console.log(this.userData.data.business)
     },
   },
   mounted() {
