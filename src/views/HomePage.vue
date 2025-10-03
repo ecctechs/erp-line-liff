@@ -28,7 +28,7 @@ export default {
   components: { DynamicTable , HeaderMenu },
   data() {
     return {
-      business_id:"",
+      user_data:[],
       currentTable: "product",
       product: [],
       customer: [],
@@ -72,17 +72,17 @@ export default {
     },
   },
   mounted() {
+    this.get_business_id();
     this.get_product();
     this.get_customer();
     this.get_company();
-    this.get_business_id();
   },
   methods: {
     async get_product() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bus_id: "96" }),
+        body: JSON.stringify({ bus_id: this.user_data.data.bus_id }),
       });
       const result = await res.json();
       this.product = result.data || [];
@@ -91,7 +91,7 @@ export default {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bus_id: "96" }),
+        body: JSON.stringify({ bus_id: this.user_data.data.bus_id }),
       });
       const result = await res.json();
       this.customer = result.data || [];
@@ -100,18 +100,14 @@ export default {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bus_id: "96" }),
+        body: JSON.stringify({ bus_id: this.user_data.data.bus_id }),
       });
       const result = await res.json();
       this.company = result.data || [];
     },
     async get_business_id() {
       const userData = localStorage.getItem('userData');
-      
-      this.business_id = JSON.parse(userData);
-      console.log("--->",this.business_id)
-      console.log("--->",this.business_id.data.bus_id)
-
+      this.user_data = JSON.parse(userData);
     },
   },
 };
