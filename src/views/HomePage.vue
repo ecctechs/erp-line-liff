@@ -115,20 +115,22 @@ export default {
 
     switchTable(table) {
       this.currentTable = table;
-      this.$nextTick(() => {
-        this.updateDataTable();
-      });
+      this.updateDataTable();
     },
 
     // 🔑 update DataTable
     updateDataTable() {
+    this.$nextTick(() => {
+      // ถ้ามี instance เก่า destroy ก่อน
       if (this.table) {
-        // destroy ก่อนเพื่อสร้างใหม่
         this.table.destroy();
+        $("#example").empty(); // clear table content
       }
-      this.$nextTick(() => {
+      // ต้องแน่ใจว่า table มี <thead> และ <tbody> ก่อน init
+      if ($("#example").length) {
         this.table = $("#example").DataTable();
-      });
+      }
+    });
     },
   },
   mounted() {
@@ -137,7 +139,9 @@ export default {
     this.get_company();
 
     this.$nextTick(() => {
-      this.table = $("#example").DataTable();
+      if ($("#example").length) {
+        this.table = $("#example").DataTable();
+      }
     });
   },
 };
