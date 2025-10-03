@@ -127,15 +127,6 @@ export default {
     this.get_customer();
     this.get_company();
 
-        console.log("📌 Table Data:", this.tableData);
-    // debug row ว่า key มีจริงไหม
-    this.tableData.forEach((row, i) => {
-      console.log(`Row ${i}:`, row);
-      this.tableHeaders.forEach(h => {
-        console.log(`   ${h.key} =>`, row[h.key]);
-      });
-    });
-
     // initialize datatable หลัง render เสร็จ
     this.$nextTick(() => {
       $("#example").DataTable();
