@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue + DataTables.js (Dynamic + Re-render)</h3>
+    <h3>Vue + DataTables.js</h3>
 
     <!-- ปุ่มสลับ dataset -->
     <div class="mb-3">
@@ -40,9 +40,8 @@ export default {
       product: [],
       customer: [],
       company: [],
-      table: null, // เก็บ instance ของ DataTable
 
-      // header config
+      // 🔑 เก็บ config สำหรับ header
       tableConfig: {
         product: [
           { label: "รหัสสินค้า", key: "productID" },
@@ -73,6 +72,7 @@ export default {
     };
   },
   computed: {
+    // รวม data ให้เรียกง่าย
     dataMap() {
       return {
         product: this.product,
@@ -90,7 +90,6 @@ export default {
       });
       const result = await res.json();
       this.product = result.data || [];
-      this.updateDataTable();
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
@@ -100,7 +99,6 @@ export default {
       });
       const result = await res.json();
       this.customer = result.data || [];
-      this.updateDataTable();
     },
     async get_company() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
@@ -110,27 +108,17 @@ export default {
       });
       const result = await res.json();
       this.company = result.data || [];
-      this.updateDataTable();
     },
 
+    // reset DataTable เวลาเปลี่ยนตาราง
     switchTable(table) {
       this.currentTable = table;
-      this.updateDataTable();
-    },
-
-    // 🔑 update DataTable
-    updateDataTable() {
-    this.$nextTick(() => {
-      // ถ้ามี instance เก่า destroy ก่อน
-      if (this.table) {
-        this.table.destroy();
-        $("#example").empty(); // clear table content
-      }
-      // ต้องแน่ใจว่า table มี <thead> และ <tbody> ก่อน init
-      if ($("#example").length) {
-        this.table = $("#example").DataTable();
-      }
-    });
+      this.$nextTick(() => {
+        if ($.fn.dataTable.isDataTable("#example")) {
+          $("#example").DataTable().destroy();
+        }
+        $("#example").DataTable();
+      });
     },
   },
   mounted() {
@@ -138,10 +126,9 @@ export default {
     this.get_customer();
     this.get_company();
 
+    // initialize datatable หลัง render เสร็จ
     this.$nextTick(() => {
-      if ($("#example").length) {
-        this.table = $("#example").DataTable();
-      }
+      $("#example").DataTable();
     });
   },
 };
