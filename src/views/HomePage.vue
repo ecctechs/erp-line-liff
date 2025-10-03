@@ -3,11 +3,11 @@
     <h3>Vue + DataTables.js</h3>
 
     <!-- ปุ่มสลับ dataset -->
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <button class="btn btn-primary me-2" @click="switchTable('product')">Product</button>
       <button class="btn btn-success me-2" @click="switchTable('customer')">Customer</button>
       <button class="btn btn-info" @click="switchTable('company')">Company</button>
-    </div>
+    </div> -->
 
     <table id="example" class="table table-striped" style="width:100%">
       <thead>
@@ -90,6 +90,7 @@ export default {
       });
       const result = await res.json();
       this.product = result.data || [];
+      console.log(this.product)
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
