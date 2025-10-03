@@ -1,6 +1,5 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue Dynamic Table + Search + Pagination</h3>
 
     <div class="mb-3">
       <button class="btn btn-primary me-2" @click="currentTable = 'product'">Product</button>
