@@ -59,7 +59,7 @@ export default {
 
     },
   },
-  getProfile() {
+  mounted() {
     this.getProfile();
   }
 };
