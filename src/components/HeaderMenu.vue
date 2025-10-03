@@ -52,6 +52,8 @@ export default {
 
       this.profile = JSON.parse(profile);
       this.userData = JSON.parse(userData);
+
+      console.log(this.userData)
     },
   },
   mounted() {
