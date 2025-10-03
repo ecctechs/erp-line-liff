@@ -30,13 +30,9 @@ export default {
       company: [],
       tableConfig: {
         product: [
-          { label: "รหัสสินค้า", key: "productID" },
-          { label: "ชื่อสินค้า", key: "productname" },
-          { label: "รายละเอียด", key: "productdetail" },
+          { label: "SKU", key: "productname" },
           { label: "จำนวนคงเหลือ", key: "amount" },
           { label: "ราคา", key: "price" },
-          { label: "วันที่เพิ่ม", key: "product_date" },
-          { label: "สถานะ", key: "Status" },
         ],
         customer: [
           { label: "รหัสลูกค้า", key: "cus_id" },
@@ -45,14 +41,12 @@ export default {
           { label: "เบอร์โทร", key: "cus_tel" },
           { label: "อีเมล", key: "cus_email" },
           { label: "เลขผู้เสียภาษี", key: "cus_tax" },
-          { label: "สถานะ", key: "Status" },
         ],
         company: [
           { label: "รหัสลูกค้า", key: "company_person_id" },
           { label: "ชื่อลูกค้า", key: "company_person_name" },
           { label: "เบอร์โทร", key: "company_person_tel" },
           { label: "อีเมล", key: "company_person_email" },
-          { label: "สถานะ", key: "company_person_status" },
         ],
       },
     };
