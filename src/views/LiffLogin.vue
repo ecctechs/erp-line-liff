@@ -1,44 +1,24 @@
 <template>
-    <!-- กรณีโหลดข้อมูล LIFF -->
-    <div v-if="loading" class="liff-container status-message">
-      <p>🚀 กำลังเตรียมข้อมูล LIFF...</p>
-    </div>
-
-    <!-- กรณีเกิดข้อผิดพลาด -->
-    <div v-else-if="error" class="liff-container status-message error">
-      <p>เกิดข้อผิดพลาด:</p>
-      <p>{{ error }}</p>
-    </div>
-
-    <!-- กรณี Login สำเร็จ -->
-    <!-- <RegisterBusiness v-else-if="profile" /> -->
-
-    <!-- กรณียังไม่ Login -->
-    <!-- <div v-else class="liff-container status-message">
-      <p>กรุณา Login ผ่าน LINE</p>
-    </div> -->
-
-    <!-- <RegisterBusiness /> -->
+  <div>
+    <p v-if="loading" class="liff-container status-message">🚀 กำลังโหลด LIFF...</p>
+    <p v-else-if="error" class="liff-container status-message error">❌ เกิดข้อผิดพลาด: {{ error }}</p>
+    <p v-else class="liff-container status-message">กรุณา login ผ่าน LINE</p>
+  </div>
 </template>
 
 <script>
-import HeaderMenu from '../components/HeaderMenu.vue';
-import RegisterBusiness from '../views/RegisterBusiness.vue';
 import liff from '@line/liff';
-
+import router from '../router';
 
 export default {
   name: 'LiffLogin',
-  components: { HeaderMenu , RegisterBusiness },
   data() {
     return {
       liffId: '2008202406-5BYrEdBE',
-      profile: null,
       error: null,
       loading: true
     };
   },
-
   methods: {
     async initLiff() {
       try {

@@ -2,12 +2,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LiffLogin from "../views/LiffLogin.vue";
 import RegisterBusiness from "../views/RegisterBusiness.vue";
-import Dashboard from "../views/Dashboard.vue";
+import HomePage from "../views/HomePage.vue";
 
 const routes = [
-  { path: "/", name: "LiffLogin", component: LiffLogin },
+  { path: "/", name: "HomePage", component: HomePage },
   { path: "/register", name: "RegisterBusiness", component: RegisterBusiness },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  // { path: "/dashboard", name: "Dashboard", component: Dashboard },
 ];
 
 const router = createRouter({
