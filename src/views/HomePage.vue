@@ -90,6 +90,7 @@ export default {
       });
       const result = await res.json();
       this.product = result.data || [];
+      console.log(this.product);
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
