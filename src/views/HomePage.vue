@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h3>Vue + DataTables.js</h3>
+    <h3>Vue + DataTables.js (Dynamic + Re-render)</h3>
 
     <!-- ปุ่มสลับ dataset -->
     <div class="mb-3">
@@ -40,8 +40,9 @@ export default {
       product: [],
       customer: [],
       company: [],
+      table: null, // เก็บ instance ของ DataTable
 
-      // 🔑 เก็บ config สำหรับ header
+      // header config
       tableConfig: {
         product: [
           { label: "รหัสสินค้า", key: "productID" },
@@ -72,7 +73,6 @@ export default {
     };
   },
   computed: {
-    // รวม data ให้เรียกง่าย
     dataMap() {
       return {
         product: this.product,
@@ -90,9 +90,7 @@ export default {
       });
       const result = await res.json();
       this.product = result.data || [];
-      console.log("1",result)
-      console.log(this.product);
-      
+      this.updateDataTable();
     },
     async get_customer() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_customer", {
@@ -102,6 +100,7 @@ export default {
       });
       const result = await res.json();
       this.customer = result.data || [];
+      this.updateDataTable();
     },
     async get_company() {
       const res = await fetch("https://erp-backend-staging.onrender.com/auth/get_company", {
@@ -111,16 +110,24 @@ export default {
       });
       const result = await res.json();
       this.company = result.data || [];
+      this.updateDataTable();
     },
 
-    // reset DataTable เวลาเปลี่ยนตาราง
     switchTable(table) {
       this.currentTable = table;
       this.$nextTick(() => {
-        if ($.fn.dataTable.isDataTable("#example")) {
-          $("#example").DataTable().destroy();
-        }
-        $("#example").DataTable();
+        this.updateDataTable();
+      });
+    },
+
+    // 🔑 update DataTable
+    updateDataTable() {
+      if (this.table) {
+        // destroy ก่อนเพื่อสร้างใหม่
+        this.table.destroy();
+      }
+      this.$nextTick(() => {
+        this.table = $("#example").DataTable();
       });
     },
   },
@@ -129,14 +136,9 @@ export default {
     this.get_customer();
     this.get_company();
 
-    // initialize datatable หลัง render เสร็จ
     this.$nextTick(() => {
-      $("#example").DataTable();
+      this.table = $("#example").DataTable();
     });
-
-    console.log("DEBUG product:", Array.isArray(this.product), this.product);
-console.log("DEBUG customer:", Array.isArray(this.customer), this.customer);
-console.log("DEBUG company:", Array.isArray(this.company), this.company);
   },
 };
 </script>
