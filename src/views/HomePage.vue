@@ -28,6 +28,7 @@ export default {
   components: { DynamicTable , HeaderMenu },
   data() {
     return {
+      business_id:"",
       currentTable: "product",
       product: [],
       customer: [],
@@ -74,6 +75,7 @@ export default {
     this.get_product();
     this.get_customer();
     this.get_company();
+    this.get_business_id();
   },
   methods: {
     async get_product() {
@@ -102,6 +104,14 @@ export default {
       });
       const result = await res.json();
       this.company = result.data || [];
+    },
+    async get_business_id() {
+      const userData = localStorage.getItem('userData');
+      
+
+      this.profile = JSON.parse(userData);
+      console.log("--->",this.profile)
+
     },
   },
 };
