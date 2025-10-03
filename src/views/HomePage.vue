@@ -110,7 +110,7 @@ export default {
       
       this.business_id = JSON.parse(userData);
       console.log("--->",this.business_id)
-      console.log("--->",this.business_id.data)
+      console.log("--->",this.business_id.data.bus_id)
 
     },
   },
