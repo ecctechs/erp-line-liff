@@ -108,7 +108,8 @@ export default {
     async get_business_id() {
       const userData = localStorage.getItem('userData');
       
-      this.business_id = JSON.parse(userData);
+      this.business_id = userData;
+       console.log("--->",this.business_id.bus_id)
       console.log("--->",this.business_id)
 
     },
