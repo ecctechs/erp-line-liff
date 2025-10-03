@@ -71,11 +71,11 @@ export default {
       };
     },
   },
-  mounted() {
-    this.get_business_id();
-    this.get_product();
-    this.get_customer();
-    this.get_company();
+  async mounted() {
+    await this.get_business_id();
+    await this.get_product();
+    await this.get_customer();
+    await this.get_company();
   },
   methods: {
     async get_product() {
