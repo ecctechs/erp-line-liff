@@ -91,7 +91,7 @@ export default {
       const result = await res.json();
       this.product = result.data || [];
       console.log("1",result)
-      console.log("2",this.product);
+      console.log(this.product);
       
     },
     async get_customer() {
