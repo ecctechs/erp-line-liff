@@ -1,12 +1,17 @@
 <template>
   <div class="container mt-4">
+    <h3>Vue Dynamic Table + Dropdown</h3>
 
-    <div class="mb-3">
-      <button class="btn btn-primary me-2" @click="currentTable = 'product'">Product</button>
-      <button class="btn btn-success me-2" @click="currentTable = 'customer'">Customer</button>
-      <button class="btn btn-info" @click="currentTable = 'company'">Company</button>
+    <!-- Dropdown -->
+    <div class="mb-3 w-25">
+      <select class="form-select" v-model="currentTable">
+        <option value="product">Product</option>
+        <option value="customer">Customer</option>
+        <option value="company">Company</option>
+      </select>
     </div>
 
+    <!-- Dynamic Table Component -->
     <DynamicTable
       :headers="tableConfig[currentTable]"
       :data="dataMap[currentTable]"
