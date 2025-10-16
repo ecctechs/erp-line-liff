@@ -130,7 +130,9 @@ export default {
       resendCooldown: 0,
       resendTimer: null,
       // for local simulation (no backend)
-      USE_LOCAL_SIM: !this.sendOtpUrl || !this.verifyOtpUrl
+      sendOtpUrl: "https://erp-backend-staging.onrender.com/auth/send-otp",
+      verifyOtpUrl: "https://erp-backend-staging.onrender.com/auth/verify-otp",
+      USE_LOCAL_SIM: false
     };
   },
   computed: {
