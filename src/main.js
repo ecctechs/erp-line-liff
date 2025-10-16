@@ -20,7 +20,7 @@ if (savedVersion !== APP_VERSION) {
   localStorage.clear();                 // ล้างข้อมูลเก่า
   localStorage.setItem('app_version', APP_VERSION); // บันทึก version ใหม่
 }
-localStorage.clear();
+// localStorage.clear();
 
 const app = createApp(App);
 app.use(router);
